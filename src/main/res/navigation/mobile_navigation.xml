@@ -9,11 +9,7 @@
         android:id="@+id/navigation_home"
         android:name="br.com.chicorialabs.picpayclonekt.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_navigation_home_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -30,6 +26,11 @@
         android:id="@+id/loginFragment"
         android:name="br.com.chicorialabs.picpayclonekt.ui.login.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login"/>
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
+    <action android:id="@+id/action_global_loginFragment" app:destination="@id/loginFragment" />
 
 </navigation>

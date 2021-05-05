@@ -9,22 +9,24 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import br.com.chicorialabs.picpayclonekt.R
+import br.com.chicorialabs.picpayclonekt.databinding.FragmentNotificationsBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class NotificationsFragment : Fragment() {
 
     private val notificationsViewModel: NotificationsViewModel by viewModel()
+    private lateinit var binding: FragmentNotificationsBinding
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_notifications, container, false)
-        val textView: TextView = root.findViewById(R.id.text_notifications)
+        binding = FragmentNotificationsBinding.inflate(layoutInflater, container, false)
+        val textView: TextView = binding.textNotifications
         notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
-        return root
+        return binding.root
     }
 }

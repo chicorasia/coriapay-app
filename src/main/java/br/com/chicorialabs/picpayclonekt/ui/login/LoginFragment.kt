@@ -6,7 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import br.com.chicorialabs.picpayclonekt.R
+import br.com.chicorialabs.picpayclonekt.data.Usuario
+import br.com.chicorialabs.picpayclonekt.data.UsuarioLogado
+import br.com.chicorialabs.picpayclonekt.databinding.FragmentLoginBinding
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {
 
@@ -14,19 +20,34 @@ class LoginFragment : Fragment() {
 //        fun newInstance() = LoginFragment()
 //    }
 
-    private lateinit var viewModel: LoginViewModel
+    private val viewModel: LoginViewModel by viewModel()
+    private lateinit var binding: FragmentLoginBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        binding = FragmentLoginBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         // TODO: Use the ViewModel
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.button.setOnClickListener {
+            UsuarioLogado.usuario = Usuario("joaovf")
+            vaiParaHome()
+        }
+    }
+
+    private fun vaiParaHome() {
+        val direcao = LoginFragmentDirections.actionLoginFragmentToNavigationHome()
+        val controlador = findNavController()
+        controlador.navigate(direcao)
     }
 
 }

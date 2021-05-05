@@ -7,34 +7,42 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import br.com.chicorialabs.picpayclonekt.R
+import br.com.chicorialabs.picpayclonekt.data.UsuarioLogado
+import br.com.chicorialabs.picpayclonekt.databinding.FragmentHomeBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModel()
+    private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
+        binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
+        val textView: TextView = binding.textHome
         homeViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (UsuarioLogado.isUsuarioNaoLogado()) {
+            vaiParaLogin()
+        }
+
+    }
+
+    private fun vaiParaLogin() {
         val direcao =
-            HomeFragmentDirections.actionNavigationHomeToLoginFragment()
+                HomeFragmentDirections.actionGlobalLoginFragment()
         val controlador = findNavController()
         controlador.navigate(direcao)
-
     }
 }
