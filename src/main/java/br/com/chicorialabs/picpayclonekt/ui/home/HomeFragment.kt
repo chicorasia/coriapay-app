@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import br.com.chicorialabs.picpayclonekt.R
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -26,5 +27,14 @@ class HomeFragment : Fragment() {
             textView.text = it
         })
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val direcao =
+            HomeFragmentDirections.actionNavigationHomeToLoginFragment()
+        val controlador = findNavController()
+        controlador.navigate(direcao)
+
     }
 }
