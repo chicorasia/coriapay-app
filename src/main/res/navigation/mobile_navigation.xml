@@ -26,11 +26,10 @@
         android:name="br.com.chicorialabs.picpayclonekt.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
-
     <fragment
         android:id="@+id/loginFragment"
         android:name="br.com.chicorialabs.picpayclonekt.ui.login.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/login_fragment"/>
-    <action android:id="@+id/action_global_loginFragment" app:destination="@id/loginFragment" />
+        tools:layout="@layout/fragment_login"/>
+
 </navigation>

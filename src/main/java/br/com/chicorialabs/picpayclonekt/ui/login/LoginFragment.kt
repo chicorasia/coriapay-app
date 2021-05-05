@@ -10,9 +10,9 @@ import br.com.chicorialabs.picpayclonekt.R
 
 class LoginFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = LoginFragment()
-    }
+//    companion object {
+//        fun newInstance() = LoginFragment()
+//    }
 
     private lateinit var viewModel: LoginViewModel
 
@@ -20,7 +20,7 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.login_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
