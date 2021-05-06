@@ -1,5 +1,6 @@
 package br.com.chicorialabs.picpayclonekt.di
 
+import br.com.chicorialabs.picpayclonekt.ui.componente.ComponenteViewModel
 import br.com.chicorialabs.picpayclonekt.ui.dashboard.DashboardViewModel
 import br.com.chicorialabs.picpayclonekt.ui.home.HomeViewModel
 import br.com.chicorialabs.picpayclonekt.ui.login.LoginViewModel
@@ -12,4 +13,5 @@ val viewModelModule = module {
     viewModel { HomeViewModel() }
     viewModel { NotificationsViewModel() }
     viewModel { LoginViewModel() }
+    viewModel { ComponenteViewModel() }
 }

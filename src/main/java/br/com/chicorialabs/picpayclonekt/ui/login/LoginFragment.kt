@@ -12,6 +12,9 @@ import br.com.chicorialabs.picpayclonekt.R
 import br.com.chicorialabs.picpayclonekt.data.Usuario
 import br.com.chicorialabs.picpayclonekt.data.UsuarioLogado
 import br.com.chicorialabs.picpayclonekt.databinding.FragmentLoginBinding
+import br.com.chicorialabs.picpayclonekt.ui.componente.Componente
+import br.com.chicorialabs.picpayclonekt.ui.componente.ComponenteViewModel
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {
@@ -21,6 +24,7 @@ class LoginFragment : Fragment() {
 //    }
 
     private val viewModel: LoginViewModel by viewModel()
+    private val componenteViewModel: ComponenteViewModel by sharedViewModel()
     private lateinit var binding: FragmentLoginBinding
 
     override fun onCreateView(
@@ -38,6 +42,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        componenteViewModel.atualizaComponentes(bottomNavigation = false)
         binding.button.setOnClickListener {
             UsuarioLogado.usuario = Usuario("joaovf")
             vaiParaHome()

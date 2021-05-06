@@ -11,12 +11,16 @@ import androidx.navigation.fragment.findNavController
 import br.com.chicorialabs.picpayclonekt.R
 import br.com.chicorialabs.picpayclonekt.data.UsuarioLogado
 import br.com.chicorialabs.picpayclonekt.databinding.FragmentHomeBinding
+import br.com.chicorialabs.picpayclonekt.ui.componente.Componente
+import br.com.chicorialabs.picpayclonekt.ui.componente.ComponenteViewModel
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModel()
     private lateinit var binding: FragmentHomeBinding
+    private val componenteViewModel: ComponenteViewModel by sharedViewModel()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -36,6 +40,8 @@ class HomeFragment : Fragment() {
         if (UsuarioLogado.isUsuarioNaoLogado()) {
             vaiParaLogin()
         }
+        componenteViewModel.atualizaComponentes(bottomNavigation = true)
+
 
     }
 
