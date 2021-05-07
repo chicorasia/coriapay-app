@@ -12,15 +12,15 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="br.com.chicorialabs.picpayclonekt.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:id="@+id/navigation_pagar"
+        android:name="br.com.chicorialabs.picpayclonekt.ui.pagar.PagarFragment"
+        android:label="@string/title_pagar"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="br.com.chicorialabs.picpayclonekt.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:id="@+id/navigation_ajustes"
+        android:name="br.com.chicorialabs.picpayclonekt.ui.ajustes.AjustesFragment"
+        android:label="@string/title_ajustes"
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/loginFragment"

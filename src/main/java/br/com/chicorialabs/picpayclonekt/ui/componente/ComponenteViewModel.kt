@@ -10,10 +10,6 @@ class ComponenteViewModel : ViewModel() {
         it.value = temComponente
     }
 
-    init {
-        _componentes.value = Componente(bottomNavigation = false)
-    }
-
     val componentes: LiveData<Componente>
         get() = _componentes
 

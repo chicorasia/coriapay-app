@@ -1,10 +1,10 @@
-package br.com.chicorialabs.picpayclonekt.ui.dashboard
+package br.com.chicorialabs.picpayclonekt.ui.pagar
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class PagarViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"
