@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.transacao.TransacaoFragment">
+
+    <ImageView
+        android:id="@+id/transacao_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_iconfinder_icons_user2_1564535"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="12dp"/>
+
+    <TextView
+        android:id="@+id/transacao_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textStyle="bold"
+        android:text="login"
+        app:layout_constraintStart_toEndOf="@+id/transacao_icon"
+        app:layout_constraintTop_toTopOf="@+id/transacao_icon" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome Completo do Usuario"
+        app:layout_constraintStart_toStartOf="@+id/transacao_login"
+        app:layout_constraintTop_toBottomOf="@+id/transacao_login" />
+
+    <EditText
+        android:id="@+id/transacao_valor_edt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:textSize="30sp"
+        android:background="@android:color/transparent"
+        android:text="R$ 0,00"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <RadioGroup
+        android:id="@+id/transacao_radiogroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/transacao_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal"
+        >
+
+        <RadioButton
+            android:id="@+id/transacao_radiobutton_saldo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Saldo"/>
+
+        <RadioButton
+            android:id="@+id/transacao_radiobutton_cartaocredito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Cartão de crédito"/>
+
+    </RadioGroup>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/transacao_cartaocredito_constraintlayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:paddingBottom="32dp"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toBottomOf="@id/transacao_radiogroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <EditText
+            android:id="@+id/transacao_numero_cartao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Número do cartão"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <EditText
+            android:id="@+id/transacao_titular_cartao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Nome do titular"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/transacao_numero_cartao"/>
+
+        <EditText
+            android:id="@+id/transacao_validade_cartao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="YYYY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/transcao_cvc_cartao"
+            app:layout_constraintTop_toBottomOf="@id/transacao_titular_cartao"/>
+
+        <EditText
+            android:id="@+id/transcao_cvc_cartao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="CVC"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/transacao_titular_cartao"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Transferência"
+        app:layout_constraintTop_toBottomOf="@id/transacao_cartaocredito_constraintlayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
