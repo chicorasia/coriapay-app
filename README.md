@@ -3,7 +3,7 @@
 PicPay Clone App.
 
 - ViewBinding
-- Controle de visibilidade de componentes por meio de ViewModel específico
+- Controle de visibilidade de componentes por meio de ViewModel específico (ComponenteViewModel)
 - Injeção de dependências com Koin
 
 

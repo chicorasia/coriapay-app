@@ -7,20 +7,20 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import br.com.chicorialabs.picpayclonekt.databinding.FragmentNotificationsBinding
+import br.com.chicorialabs.picpayclonekt.databinding.FragmentAjustesBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class AjustesFragment : Fragment() {
 
     private val ajustesViewModel: AjustesViewModel by viewModel()
-    private lateinit var binding: FragmentNotificationsBinding
+    private lateinit var binding: FragmentAjustesBinding
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentNotificationsBinding.inflate(layoutInflater, container, false)
+        binding = FragmentAjustesBinding.inflate(layoutInflater, container, false)
         val textView: TextView = binding.textNotifications
         ajustesViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it

@@ -15,13 +15,13 @@
         android:id="@+id/navigation_pagar"
         android:name="br.com.chicorialabs.picpayclonekt.ui.pagar.PagarFragment"
         android:label="@string/title_pagar"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_pagar" />
 
     <fragment
         android:id="@+id/navigation_ajustes"
         android:name="br.com.chicorialabs.picpayclonekt.ui.ajustes.AjustesFragment"
         android:label="@string/title_ajustes"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_ajustes" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="br.com.chicorialabs.picpayclonekt.ui.login.LoginFragment"

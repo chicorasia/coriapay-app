@@ -7,24 +7,24 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import br.com.chicorialabs.picpayclonekt.databinding.FragmentDashboardBinding
+import br.com.chicorialabs.picpayclonekt.databinding.FragmentPagarBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PagarFragment : Fragment() {
 
     private val pagarViewModel: PagarViewModel by viewModel()
-    private lateinit var binding: FragmentDashboardBinding
+    private lateinit var binding: FragmentPagarBinding
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentDashboardBinding.inflate(layoutInflater, container, false)
-        val textView: TextView = binding.textDashboard
-        pagarViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+        binding = FragmentPagarBinding.inflate(layoutInflater, container, false)
+//        val textView: TextView = binding.textDashboard
+//        pagarViewModel.text.observe(viewLifecycleOwner, Observer {
+//            textView.text = it
+//        })
         return binding.root
     }
 }
