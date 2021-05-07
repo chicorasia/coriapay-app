@@ -29,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginTop="8dp"
             android:text="login"
@@ -40,6 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:textSize="18sp"
             android:text="full name"
             app:layout_constraintBottom_toBottomOf="@id/item_icon"
             app:layout_constraintStart_toStartOf="@id/item_login_tv"/>
