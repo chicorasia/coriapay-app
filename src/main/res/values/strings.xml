@@ -14,4 +14,21 @@
     <string name="login_failed">"Login failed"</string>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_placeholder">login</string>
+    <string name="nome_completo_do_usuario">Nome Completo do Usuario</string>
+    <string name="zero_reais">R$ 0,00</string>
+    <string name="saldo">Saldo</string>
+    <string name="cartao_de_credito">Cartão de crédito</string>
+    <string name="numero_do_cartao">Número do cartão</string>
+    <string name="nome_do_titular">Nome do titular</string>
+    <string name="validade">Validade</string>
+    <string name="cvc">CVC</string>
+    <string name="transferencia">Transferência</string>
+    <string name="usuario_hint">Usuário</string>
+    <string name="joaovf">joaovf</string>
+    <string name="senha">Senha</string>
+    <string name="contatos">Contatos:</string>
+    <string name="entrar">Entrar</string>
+    <string name="picpay_logo_description">logo da empresa PicPay</string>
+    <string name="user_icon_description">icone de um usuario</string>
 </resources>

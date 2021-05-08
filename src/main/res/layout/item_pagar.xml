@@ -22,7 +22,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_iconfinder_icons_user2_1564535" />
+            app:srcCompat="@drawable/ic_iconfinder_icons_user2_1564535"
+            android:contentDescription="@string/user_icon_description"/>
 
         <TextView
             android:id="@+id/item_login_tv"
@@ -32,7 +33,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginTop="8dp"
-            android:text="login"
+            android:text="@string/login_placeholder"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/item_icon"/>
 
@@ -42,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:textSize="18sp"
-            android:text="full name"
+            android:text="@string/nome_completo_do_usuario"
             app:layout_constraintBottom_toBottomOf="@id/item_icon"
             app:layout_constraintStart_toStartOf="@id/item_login_tv"/>
 

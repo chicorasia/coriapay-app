@@ -22,8 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/white"
-            android:hint="Usuário"
-            android:text="joaovf"/>
+            android:hint="@string/usuario_hint"
+            android:text="@string/joaovf"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/white"
-            android:hint="Senha" />
+            android:hint="@string/senha" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -52,7 +52,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Entrar"
+        android:text="@string/entrar"
         app:cornerRadius="8dp"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +71,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19999999" />
+        app:layout_constraintVertical_bias="0.19999999"
+        android:contentDescription="@string/picpay_logo_description"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
