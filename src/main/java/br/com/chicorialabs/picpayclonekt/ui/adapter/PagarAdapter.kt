@@ -1,14 +1,13 @@
 package br.com.chicorialabs.picpayclonekt.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.chicorialabs.picpayclonekt.data.Usuario
 import br.com.chicorialabs.picpayclonekt.databinding.ItemPagarBinding
 
 class PagarAdapter(private val lista: List<Usuario>,
-                   val onClick: () -> Unit)
+                   val onClick: (Usuario) -> Unit)
     : RecyclerView.Adapter<PagarAdapter.PagarViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagarViewHolder {
@@ -31,7 +30,7 @@ class PagarAdapter(private val lista: List<Usuario>,
                 binding.itemLoginTv.text = it.login
                 binding.itemFullnameTv.text = it.nomeCompleto
             }
-            binding.root.setOnClickListener { onClick() }
+            binding.root.setOnClickListener { onClick(usuario) }
         }
 
     }

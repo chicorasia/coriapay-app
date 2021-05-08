@@ -15,7 +15,13 @@
         android:id="@+id/navigation_pagar"
         android:name="br.com.chicorialabs.picpayclonekt.ui.pagar.PagarFragment"
         android:label="@string/title_pagar"
-        tools:layout="@layout/fragment_pagar" />
+        tools:layout="@layout/fragment_pagar" >
+        <action
+            android:id="@+id/action_navigation_pagar_to_transacaoFragment"
+            app:destination="@id/transacaoFragment"
+            app:popUpTo="@id/navigation_pagar"
+            app:popUpToInclusive="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_ajustes"
@@ -38,5 +44,18 @@
         app:destination="@id/loginFragment"
         app:popUpTo="@id/navigation_home"
         app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/transacaoFragment"
+        android:name="br.com.chicorialabs.picpayclonekt.ui.transacao.TransacaoFragment"
+        android:label="fragment_transacao"
+        tools:layout="@layout/fragment_transacao" >
+        <action
+            android:id="@+id/action_transacaoFragment_to_navigation_pagar"
+            app:destination="@id/navigation_pagar"
+            app:popUpTo="@id/navigation_pagar"
+            app:popUpToInclusive="true" />
+        <argument android:name="usuario"
+            app:argType="br.com.chicorialabs.picpayclonekt.data.Usuario" />
+    </fragment>
 
 </navigation>

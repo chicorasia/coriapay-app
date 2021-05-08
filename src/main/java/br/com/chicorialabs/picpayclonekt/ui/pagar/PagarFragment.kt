@@ -1,11 +1,12 @@
 package br.com.chicorialabs.picpayclonekt.ui.pagar
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import br.com.chicorialabs.picpayclonekt.data.Usuario
 import br.com.chicorialabs.picpayclonekt.databinding.FragmentPagarBinding
@@ -16,6 +17,7 @@ class PagarFragment : Fragment() {
 
     private val pagarViewModel: PagarViewModel by viewModel()
     private lateinit var binding: FragmentPagarBinding
+    private val controlador: NavController by lazy { findNavController() }
 
     private val contatosRv : RecyclerView by lazy {
         binding.pagarContatosRv
@@ -33,14 +35,22 @@ class PagarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initListaContatos()
+    }
+
+    private fun initListaContatos() {
         val listaMock = listOf<Usuario>(
                 Usuario(login = "chicoria", nomeCompleto = "Chico Rasia"),
                 Usuario(login = "joaovf", nomeCompleto = "Joao Vitor Ferreira"),
                 Usuario(login = "tdurden", nomeCompleto = "Tyler Durden")
         )
 
-        contatosRv.adapter = PagarAdapter(listaMock, onClick =  {
-            Log.i("pic_pay", "onViewCreated: Clicou no item da RV!!!")
-        } )
+        contatosRv.adapter = PagarAdapter(listaMock, onClick = { usuarioClicado ->
+
+            val direcao = PagarFragmentDirections
+                    .actionNavigationPagarToTransacaoFragment(usuarioClicado)
+            controlador.navigate(direcao)
+
+        })
     }
 }
