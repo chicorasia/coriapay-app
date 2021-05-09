@@ -5,17 +5,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.com.chicorialabs.picpayclonekt.R
+import br.com.chicorialabs.picpayclonekt.data.CartaoCredito
+import br.com.chicorialabs.picpayclonekt.data.UsuarioLogado
+import br.com.chicorialabs.picpayclonekt.data.transacao.Transacao
+import br.com.chicorialabs.picpayclonekt.data.transacao.Transacao.Companion.gerarHash
 import br.com.chicorialabs.picpayclonekt.databinding.FragmentTransacaoBinding
+import br.com.chicorialabs.picpayclonekt.extension.formatar
+import org.koin.android.viewmodel.ext.android.viewModel
+import java.util.*
 
 class TransacaoFragment : Fragment() {
 
     private lateinit var binding: FragmentTransacaoBinding
     private val argumentos by navArgs<TransacaoFragmentArgs>()
+    private val transacaoViewModel: TransacaoViewModel by viewModel()
     private val usuario by lazy {
         argumentos.usuario
     }
+    private val controlador by lazy { findNavController() }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,28 +43,73 @@ class TransacaoFragment : Fragment() {
 
         configurarUsuario()
         configuraRadioGroup()
-        binding.transacaoTransferirBtn.setOnClickListener {
+        configurarBotaoTransferir()
 
-            val valor = getValor()
 
-            if(binding.transacaoRadiobuttonCartaocredito.isChecked) {
-                //criar transacao com Cartao de Credito
-                criarTransferenciaCartao()
-            } else {
-                //criar transacao com Saldo
-            }
+        transacaoViewModel.transacao.observe(viewLifecycleOwner) {
+            //retorna para a tela anterior quando a transacao é gravada e retornada
+            val direcao = TransacaoFragmentDirections.actionTransacaoFragmentToNavigationPagar()
+            controlador.navigate(direcao)
         }
 
     }
 
-    private fun criarTransferenciaCartao() {
-//        TODO: implemnentar esse método
+    private fun configurarBotaoTransferir() {
+        binding.transacaoTransferirBtn.setOnClickListener {
+
+            val isCartaoCredito = binding.transacaoRadiobuttonCartaocredito.isChecked
+            val valor = getValor()
+
+            val transacao = if (isCartaoCredito) {
+                criarTransferenciaCartao(isCartaoCredito, valor)
+            } else {
+                criarTransferenciaSaldo(valor)
+            }
+
+            transacaoViewModel.transferir(transacao)
+        }
+    }
+
+    private fun criarTransferenciaSaldo(valor: Double) = Transacao(
+            codigo = gerarHash(),
+            origem = UsuarioLogado.usuario,
+            destino = usuario,
+            dataHora = Calendar.getInstance().formatar(),
+            isCartaoCredito = false,
+            valor = valor,
+        )
+
+    private fun criarTransferenciaCartao(isCartaoCredito: Boolean, valor: Double) =
+        Transacao(
+            codigo = gerarHash(),
+            origem = UsuarioLogado.usuario,
+            destino = usuario,
+            dataHora = Calendar.getInstance().formatar(),
+            isCartaoCredito = isCartaoCredito,
+            valor = valor,
+            cartaoCredito = criarCartaoCredito()
+        )
+
+    private fun criarCartaoCredito(): CartaoCredito {
+        val numeroCartao = binding.transacaoNumeroCartao.text.toString()
+        val nomeTitular = binding.transacaoTitularCartao.text.toString()
+        val vencimento = binding.transacaoValidadeCartao.text.toString()
+        val cvc = binding.transcaoCvcCartao.text.toString()
+
+        return CartaoCredito(
+            numeroCartao = numeroCartao,
+            nomeTitular = nomeTitular,
+            dataExpiracao = vencimento,
+            codigoSeguranca = cvc,
+            usuario = UsuarioLogado.usuario,
+        )
+
     }
 
     private fun getValor(): Double {
-        val valor = binding.transacaoValorEdt.text as String
-        if(valor.isEmpty()) return 0.0
-        else return valor.toDouble()
+        val valor = binding.transacaoValorEdt.text.toString()
+        return if(valor.isEmpty()) 0.0
+        else valor.toDouble()
     }
 
     private fun configurarUsuario() {
