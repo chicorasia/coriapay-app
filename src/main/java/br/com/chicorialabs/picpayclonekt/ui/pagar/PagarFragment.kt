@@ -34,18 +34,19 @@ class PagarFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observarContatos()
 
-        initListaContatos()
     }
 
-    private fun initListaContatos() {
-        val listaMock = listOf<Usuario>(
-                Usuario(login = "chicoria", nomeCompleto = "Chico Rasia"),
-                Usuario(login = "joaovf", nomeCompleto = "Joao Vitor Ferreira"),
-                Usuario(login = "tdurden", nomeCompleto = "Tyler Durden")
-        )
+    private fun observarContatos() {
+        pagarViewModel.listaContatos.observe(viewLifecycleOwner) { listaContatos ->
+            initListaContatos(listaContatos)
+        }
+    }
 
-        contatosRv.adapter = PagarAdapter(listaMock, onClick = { usuarioClicado ->
+    private fun initListaContatos(listaContatos: List<Usuario>) {
+
+        contatosRv.adapter = PagarAdapter(listaContatos, onClick = { usuarioClicado ->
 
             val direcao = PagarFragmentDirections
                     .actionNavigationPagarToTransacaoFragment(usuarioClicado)
