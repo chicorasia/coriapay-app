@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import br.com.chicorialabs.picpayclonekt.data.UsuarioLogado
 import br.com.chicorialabs.picpayclonekt.databinding.FragmentHomeBinding
 import br.com.chicorialabs.picpayclonekt.extension.formatarMoeda
+import br.com.chicorialabs.picpayclonekt.ui.adapter.HomeAdapter
 import br.com.chicorialabs.picpayclonekt.ui.componente.ComponenteViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -38,6 +39,12 @@ class HomeFragment : Fragment() {
 
         observarSaldo()
         observarErro()
+
+        homeViewModel.transacoes.observe(viewLifecycleOwner) {
+            it?.let{
+                binding.homeRecyclerview.adapter = HomeAdapter(it)
+            }
+        }
 
 
     }

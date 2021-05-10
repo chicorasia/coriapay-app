@@ -41,7 +41,7 @@
         android:inputType="numberDecimal"
         android:textSize="30sp"
         android:background="@android:color/transparent"
-        android:text="@string/zero_reais"
+        android:hint="@string/zero_reais"
         app:layout_constraintStart_toStartOf="@+id/transacao_nome_completo"
         app:layout_constraintTop_toBottomOf="@+id/transacao_nome_completo" />
 

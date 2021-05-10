@@ -16,13 +16,17 @@
             android:id="@+id/item_inicial_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="F"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
             android:background="@drawable/circulo"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="F"
             android:textAlignment="center"
             android:textColor="@color/white"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/item_origem_tv"
