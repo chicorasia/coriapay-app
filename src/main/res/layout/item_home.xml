@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="4dp"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="3dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_home_constraintlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/item_inicial_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="F"
+            android:background="@drawable/circulo"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/item_origem_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/usuarioorigem"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/item_inicial_tv"
+            app:layout_constraintTop_toTopOf="@id/item_inicial_tv"
+            app:layout_constraintBottom_toBottomOf="@id/item_inicial_tv"/>
+
+        <TextView
+            android:id="@+id/item_pagou"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/pagou"
+            app:layout_constraintStart_toEndOf="@+id/item_origem_tv"
+            app:layout_constraintBaseline_toBaselineOf="@id/item_origem_tv"/>
+
+        <TextView
+            android:id="@+id/item_destino_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/usuariodestino"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/item_pagou"
+            app:layout_constraintBottom_toBottomOf="@id/item_origem_tv"/>
+
+        <TextView
+            android:id="@+id/item_valor_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            android:textSize="16dp"
+            android:text="@string/zero_reais"
+            app:layout_constraintTop_toBottomOf="@+id/item_inicial_tv"
+            app:layout_constraintStart_toStartOf="@id/item_inicial_tv"
+            />
+
+        <TextView
+            android:id="@+id/item_datahora_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/data_hora_placeholder"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/item_separador"
+            app:layout_constraintBaseline_toBaselineOf="@id/item_valor_tv"
+            />
+
+        <TextView
+            android:id="@+id/item_separador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text=" | "
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/item_valor_tv"
+            app:layout_constraintBaseline_toBaselineOf="@id/item_valor_tv"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

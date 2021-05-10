@@ -36,13 +36,13 @@ class HomeFragment : Fragment() {
         }
         componenteViewModel.atualizaComponentes(bottomNavigation = true)
 
-        initObservadorSaldo()
-        initObservadorErro()
+        observarSaldo()
+        observarErro()
 
 
     }
 
-    private fun initObservadorErro() {
+    private fun observarErro() {
         homeViewModel.erro.observe(viewLifecycleOwner) {
             it?.let {
                 Toast.makeText(
@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun initObservadorSaldo() {
+    private fun observarSaldo() {
         homeViewModel.saldo.observe(viewLifecycleOwner) {
             it?.let {
                 binding.homeSaldo.text = it.formatarMoeda()

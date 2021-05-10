@@ -1,5 +1,6 @@
 package br.com.chicorialabs.picpayclonekt.service
 
+import br.com.chicorialabs.picpayclonekt.data.PageTransacao
 import br.com.chicorialabs.picpayclonekt.data.Usuario
 import br.com.chicorialabs.picpayclonekt.data.transacao.Transacao
 import retrofit2.http.*
@@ -14,4 +15,7 @@ interface ApiService {
 
     @GET("/usuarios/{login}/saldo")
     suspend fun getSaldo(@Path("login") login: String) : Usuario
+
+    @GET("/transacoes")
+    suspend fun getTransacoes(@Query("login") login: String) : PageTransacao
 }
