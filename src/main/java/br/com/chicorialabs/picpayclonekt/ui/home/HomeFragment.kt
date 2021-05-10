@@ -35,18 +35,21 @@ class HomeFragment : Fragment() {
         if (UsuarioLogado.isUsuarioNaoLogado()) {
             vaiParaLogin()
         }
-        componenteViewModel.atualizaComponentes(bottomNavigation = true)
 
+        componenteViewModel.atualizaComponentes(bottomNavigation = true)
         observarSaldo()
         observarErro()
+        observarTransacoes()
 
+
+    }
+
+    private fun observarTransacoes() {
         homeViewModel.transacoes.observe(viewLifecycleOwner) {
-            it?.let{
+            it?.let {
                 binding.homeRecyclerview.adapter = HomeAdapter(it)
             }
         }
-
-
     }
 
     private fun observarErro() {

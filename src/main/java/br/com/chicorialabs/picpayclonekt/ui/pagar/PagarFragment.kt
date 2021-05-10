@@ -11,11 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.chicorialabs.picpayclonekt.data.Usuario
 import br.com.chicorialabs.picpayclonekt.databinding.FragmentPagarBinding
 import br.com.chicorialabs.picpayclonekt.ui.adapter.PagarAdapter
+import br.com.chicorialabs.picpayclonekt.ui.componente.ComponenteViewModel
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PagarFragment : Fragment() {
 
     private val pagarViewModel: PagarViewModel by viewModel()
+    private val componenteViewModel: ComponenteViewModel by sharedViewModel()
     private lateinit var binding: FragmentPagarBinding
     private val controlador: NavController by lazy { findNavController() }
 
@@ -35,6 +38,7 @@ class PagarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observarContatos()
+        componenteViewModel.atualizaComponentes(bottomNavigation = true)
 
     }
 

@@ -1,13 +1,13 @@
 package br.com.chicorialabs.picpayclonekt.ui.ajustes
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import br.com.chicorialabs.picpayclonekt.data.Usuario
+import br.com.chicorialabs.picpayclonekt.data.UsuarioLogado
 
 class AjustesViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
-    }
-    val text: LiveData<String> = _text
+    private val _usuario = UsuarioLogado.usuario
+    val usuario: Usuario
+        get() = _usuario
+
 }

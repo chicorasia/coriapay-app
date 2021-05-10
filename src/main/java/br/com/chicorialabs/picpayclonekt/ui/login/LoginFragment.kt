@@ -1,18 +1,14 @@
 package br.com.chicorialabs.picpayclonekt.ui.login
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import br.com.chicorialabs.picpayclonekt.R
 import br.com.chicorialabs.picpayclonekt.data.Usuario
 import br.com.chicorialabs.picpayclonekt.data.UsuarioLogado
 import br.com.chicorialabs.picpayclonekt.databinding.FragmentLoginBinding
-import br.com.chicorialabs.picpayclonekt.ui.componente.Componente
 import br.com.chicorialabs.picpayclonekt.ui.componente.ComponenteViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -44,7 +40,8 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         componenteViewModel.atualizaComponentes(bottomNavigation = false)
         binding.button.setOnClickListener {
-            UsuarioLogado.usuario = Usuario("joaovf")
+            val login = binding.editTextUsuario.text.toString()
+            UsuarioLogado.usuario = Usuario(login)
             vaiParaHome()
         }
     }

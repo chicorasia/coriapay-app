@@ -14,6 +14,8 @@ import br.com.chicorialabs.picpayclonekt.data.transacao.Transacao
 import br.com.chicorialabs.picpayclonekt.data.transacao.Transacao.Companion.gerarHash
 import br.com.chicorialabs.picpayclonekt.databinding.FragmentTransacaoBinding
 import br.com.chicorialabs.picpayclonekt.extension.formatar
+import br.com.chicorialabs.picpayclonekt.ui.componente.ComponenteViewModel
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -22,6 +24,7 @@ class TransacaoFragment : Fragment() {
     private lateinit var binding: FragmentTransacaoBinding
     private val argumentos by navArgs<TransacaoFragmentArgs>()
     private val transacaoViewModel: TransacaoViewModel by viewModel()
+    private val componenteViewModel: ComponenteViewModel by sharedViewModel()
     private val usuario by lazy {
         argumentos.usuario
     }
@@ -45,13 +48,17 @@ class TransacaoFragment : Fragment() {
         configuraRadioGroup()
         configurarBotaoTransferir()
 
+        componenteViewModel.atualizaComponentes(bottomNavigation = false)
+        observarTransacao()
 
+    }
+
+    private fun observarTransacao() {
         transacaoViewModel.transacao.observe(viewLifecycleOwner) {
             //retorna para a tela anterior quando a transacao é gravada e retornada
             val direcao = TransacaoFragmentDirections.actionTransacaoFragmentToNavigationPagar()
             controlador.navigate(direcao)
         }
-
     }
 
     private fun configurarBotaoTransferir() {
