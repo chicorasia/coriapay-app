@@ -37,4 +37,7 @@
     <string name="usuariodestino">usuariodestino</string>
     <string name="pagou">pagou</string>
     <string name="usuarioorigem">usuarioorigem</string>
+    <string name="meu_email">Meu email</string>
+    <string name="meu_numero">Meu número</string>
+    <string name="meu_picpay">Meu PicPay</string>
 </resources>
