@@ -2,9 +2,11 @@
 
 PicPay Clone App.
 
-- ViewBinding
+- Emprego de ViewBinding e 'kotlin-parcelize'em lugar de 'kotlin-extensions'
 - Controle de visibilidade de componentes por meio de ViewModel específico (ComponenteViewModel)
 - Injeção de dependências com Koin
+
+
 
 ![tela de login](Screenshot_1.png)
 ![tela home](Screenshot_2.png)
