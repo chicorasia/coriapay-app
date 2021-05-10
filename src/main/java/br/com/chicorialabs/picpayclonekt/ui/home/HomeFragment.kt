@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import br.com.chicorialabs.picpayclonekt.R
 import br.com.chicorialabs.picpayclonekt.data.UsuarioLogado
 import br.com.chicorialabs.picpayclonekt.databinding.FragmentHomeBinding
-import br.com.chicorialabs.picpayclonekt.ui.componente.Componente
+import br.com.chicorialabs.picpayclonekt.extension.formatarMoeda
 import br.com.chicorialabs.picpayclonekt.ui.componente.ComponenteViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -28,10 +26,6 @@ class HomeFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
         return binding.root
     }
 
@@ -42,7 +36,30 @@ class HomeFragment : Fragment() {
         }
         componenteViewModel.atualizaComponentes(bottomNavigation = true)
 
+        initObservadorSaldo()
+        initObservadorErro()
 
+
+    }
+
+    private fun initObservadorErro() {
+        homeViewModel.erro.observe(viewLifecycleOwner) {
+            it?.let {
+                Toast.makeText(
+                    this@HomeFragment.context,
+                    "Ocorreu um erro: ${it}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+    }
+
+    private fun initObservadorSaldo() {
+        homeViewModel.saldo.observe(viewLifecycleOwner) {
+            it?.let {
+                binding.homeSaldo.text = it.formatarMoeda()
+            }
+        }
     }
 
     private fun vaiParaLogin() {

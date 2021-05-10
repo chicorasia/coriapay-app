@@ -31,4 +31,6 @@
     <string name="entrar">Entrar</string>
     <string name="picpay_logo_description">logo da empresa PicPay</string>
     <string name="user_icon_description">icone de um usuario</string>
+    <string name="atividade">Atividade:</string>
+    <string name="seu_saldo">Seu saldo:</string>
 </resources>
