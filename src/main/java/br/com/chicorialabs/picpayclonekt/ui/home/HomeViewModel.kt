@@ -32,12 +32,12 @@ class HomeViewModel(private val apiService: ApiService) : ViewModel() {
         launch {
             val login = UsuarioLogado.usuario.login
             val saldo = apiService.getSaldo(login).saldo
+            saldo?.let {
+                _saldo.value = it
+            }
             val transacoes = apiService.getTransacoes(login).content
             transacoes?.let {
                 _transacoes.value = it
-            }
-            saldo?.let {
-                _saldo.value = it
             }
         }
     }
