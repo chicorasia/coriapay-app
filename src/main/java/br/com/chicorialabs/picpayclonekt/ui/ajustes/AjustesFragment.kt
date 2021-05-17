@@ -5,15 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import br.com.chicorialabs.picpayclonekt.databinding.FragmentAjustesBinding
 import br.com.chicorialabs.picpayclonekt.ui.componente.ComponenteViewModel
+import br.com.chicorialabs.picpayclonekt.ui.login.LoginViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class AjustesFragment : Fragment() {
 
     private val ajustesViewModel: AjustesViewModel by viewModel()
+    private val loginViewModel: LoginViewModel by sharedViewModel()
     private val componenteViewModel: ComponenteViewModel by sharedViewModel()
     private lateinit var binding: FragmentAjustesBinding
     private val controlador by lazy {
@@ -52,9 +55,16 @@ class AjustesFragment : Fragment() {
         inicializaCamposTexto()
 
         componenteViewModel.atualizaComponentes(bottomNavigation = true)
+
+        loginViewModel.efetuouLogin.observe(viewLifecycleOwner, Observer<Boolean> {
+            if(!it){
+                val direcao = AjustesFragmentDirections.actionGlobalLoginFragment()
+                controlador.navigate(direcao)
+            }
+        })
+
         binding.ajustesSairBtn.setOnClickListener {
-            val direcao = AjustesFragmentDirections.actionGlobalLoginFragment()
-            controlador.navigate(direcao)
+            loginViewModel.onLogoff()
         }
 
 

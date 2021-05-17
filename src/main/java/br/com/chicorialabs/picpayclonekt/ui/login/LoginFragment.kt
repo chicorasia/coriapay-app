@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import br.com.chicorialabs.picpayclonekt.data.Usuario
 import br.com.chicorialabs.picpayclonekt.data.UsuarioLogado
 import br.com.chicorialabs.picpayclonekt.databinding.FragmentLoginBinding
 import br.com.chicorialabs.picpayclonekt.ui.componente.ComponenteViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
-import org.koin.android.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {
 
@@ -19,7 +19,7 @@ class LoginFragment : Fragment() {
 //        fun newInstance() = LoginFragment()
 //    }
 
-    private val viewModel: LoginViewModel by viewModel()
+    private val viewModel: LoginViewModel by sharedViewModel()
     private val componenteViewModel: ComponenteViewModel by sharedViewModel()
     private lateinit var binding: FragmentLoginBinding
 
@@ -42,8 +42,14 @@ class LoginFragment : Fragment() {
         binding.button.setOnClickListener {
             val login = binding.editTextUsuario.text.toString()
             UsuarioLogado.usuario = Usuario(login)
-            vaiParaHome()
+            viewModel.onLoginEfetuado()
         }
+
+        viewModel.efetuouLogin.observe(viewLifecycleOwner, Observer<Boolean> { efetuouLogin ->
+            if(efetuouLogin) {
+                vaiParaHome()
+            }
+        })
     }
 
     private fun vaiParaHome() {

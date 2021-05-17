@@ -30,7 +30,7 @@ class HomeAdapter(private val lista: List<Transacao>) :
 
         fun bind(transacao: Transacao) {
             with(binding) {
-                transacao.let{
+                transacao?.let{
                     itemInicialTv.text = transacao.origem.nomeCompleto.first().toString()
                     itemOrigemTv.text = transacao.origem.login
                     itemDestinoTv.text = transacao.destino.login
