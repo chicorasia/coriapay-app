@@ -19,7 +19,7 @@ class LoginFragment : Fragment() {
 //        fun newInstance() = LoginFragment()
 //    }
 
-    private val viewModel: LoginViewModel by sharedViewModel()
+    private val mLoginViewModel: LoginViewModel by sharedViewModel()
     private val componenteViewModel: ComponenteViewModel by sharedViewModel()
     private lateinit var binding: FragmentLoginBinding
 
@@ -28,25 +28,18 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginBinding.inflate(layoutInflater, container, false)
+        binding.loginViewModel = mLoginViewModel
         return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        // TODO: Use the ViewModel
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         componenteViewModel.atualizaComponentes(bottomNavigation = false)
-        binding.button.setOnClickListener {
-            val login = binding.editTextUsuario.text.toString()
-            UsuarioLogado.usuario = Usuario(login)
-            viewModel.onLoginEfetuado()
-        }
 
-        viewModel.efetuouLogin.observe(viewLifecycleOwner, Observer<Boolean> { efetuouLogin ->
+        mLoginViewModel.efetuouLogin.observe(viewLifecycleOwner, Observer<Boolean> { efetuouLogin ->
             if(efetuouLogin) {
+                val login = binding.editTextUsuario.text.toString()
+                UsuarioLogado.usuario = Usuario(login)
                 vaiParaHome()
             }
         })

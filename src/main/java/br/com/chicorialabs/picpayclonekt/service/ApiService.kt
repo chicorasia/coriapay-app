@@ -18,4 +18,7 @@ interface ApiService {
 
     @GET("/transacoes")
     suspend fun getTransacoes(@Query("login") login: String) : PageTransacao
+
+    @GET("/usuarios/{login}")
+    suspend fun getUsuario(@Path("login") login: String) : Usuario
 }

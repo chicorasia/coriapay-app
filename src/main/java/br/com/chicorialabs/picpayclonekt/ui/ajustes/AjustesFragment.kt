@@ -15,9 +15,9 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class AjustesFragment : Fragment() {
 
-    private val ajustesViewModel: AjustesViewModel by viewModel()
-    private val loginViewModel: LoginViewModel by sharedViewModel()
-    private val componenteViewModel: ComponenteViewModel by sharedViewModel()
+    private val mAjustesViewModel: AjustesViewModel by viewModel()
+    private val mLoginViewModel: LoginViewModel by sharedViewModel()
+    private val mComponenteViewModel: ComponenteViewModel by sharedViewModel()
     private lateinit var binding: FragmentAjustesBinding
     private val controlador by lazy {
         findNavController()
@@ -46,6 +46,7 @@ class AjustesFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAjustesBinding.inflate(layoutInflater, container, false)
+        binding.loginViewModel = mLoginViewModel
 
         return binding.root
     }
@@ -54,24 +55,20 @@ class AjustesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         inicializaCamposTexto()
 
-        componenteViewModel.atualizaComponentes(bottomNavigation = true)
+        mComponenteViewModel.atualizaComponentes(bottomNavigation = true)
 
-        loginViewModel.efetuouLogin.observe(viewLifecycleOwner, Observer<Boolean> {
+        mLoginViewModel.efetuouLogin.observe(viewLifecycleOwner, Observer<Boolean> {
             if(!it){
                 val direcao = AjustesFragmentDirections.actionGlobalLoginFragment()
                 controlador.navigate(direcao)
             }
         })
 
-        binding.ajustesSairBtn.setOnClickListener {
-            loginViewModel.onLogoff()
-        }
-
 
     }
 
     private fun inicializaCamposTexto() {
-        ajustesViewModel.usuario?.let {
+        mAjustesViewModel.usuario.let {
             ajustesLogin.text = it.login
             meuPicPayLogin.text = it.login
             meuNumero.text = it.numeroTelefone ?: "Nenhum número cadastrado"

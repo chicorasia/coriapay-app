@@ -15,7 +15,7 @@ val viewModelModule = module {
     viewModel { PagarViewModel(get()) }
     viewModel { HomeViewModel(get()) }
     viewModel { AjustesViewModel() }
-    viewModel { LoginViewModel() }
+    viewModel { LoginViewModel(get()) }
     viewModel { ComponenteViewModel() }
     viewModel { TransacaoViewModel(get()) }
 }
