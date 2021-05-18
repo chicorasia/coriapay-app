@@ -7,6 +7,9 @@ PicPay Clone App.
 - Injeção de dependências com Koin
 - DataBinding para comunicação direta entre ViewModel e componentes da UI
 
+***
+:earth_africa: O App consome esta API: https://github.com/chicorasia/picpayclone-kt-v2
+***
 
 
 ![tela de login](Screenshot_1.png)
