@@ -23,8 +23,8 @@ class LoginViewModel(val apiService: ApiService) : ViewModel() {
     val usuario: LiveData<Usuario>
         get() = _usuario
 
-    private val _token = MutableLiveData<Token>()
-    val token: LiveData<Token>
+    private val _token = MutableLiveData<Token?>()
+    val token: LiveData<Token?>
         get() = _token
 
     private val _onLoading = MutableLiveData<Boolean>()
@@ -44,8 +44,9 @@ class LoginViewModel(val apiService: ApiService) : ViewModel() {
     }
 
     fun onLogoff() {
-        _efetuouLogin.value = false
         UsuarioLogado.isUsuarioNaoLogado()
+        _efetuouLogin.value = false
+        _token.value = null
     }
 
     fun launchAndCatchException(block: suspend () -> Unit) {
@@ -68,15 +69,12 @@ class LoginViewModel(val apiService: ApiService) : ViewModel() {
             val token = apiService.autentica(login)
             _token.value = token
             UsuarioLogado.token = token
-//            token.value?.let {
 //                _usuario.value = apiService.getUsuario(login.usuario)
 //                _usuario.value?.let {
 //                    UsuarioLogado.usuario = it
 //                }
-//            }
         }
     }
-
 
 
 }

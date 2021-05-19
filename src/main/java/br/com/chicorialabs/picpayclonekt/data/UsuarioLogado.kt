@@ -9,5 +9,4 @@ object UsuarioLogado {
 
     fun isUsuarioNaoLogado() = !isUsuarioLogado()
 
-
 }

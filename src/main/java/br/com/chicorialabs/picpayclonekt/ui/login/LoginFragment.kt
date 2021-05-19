@@ -40,24 +40,35 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         componenteViewModel.atualizaComponentes(bottomNavigation = false)
 
-        mLoginViewModel.token.observe(viewLifecycleOwner) {
-            Log.i("picpay_kt", "onViewCreated: token modificado! ${it.token}")
-            vaiParaHome()
-        }
+        observaToken()
+        observaProgressBar()
+        observaErro()
+        observaLogin()
+    }
 
+    private fun observaErro() {
+        mLoginViewModel.onError.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), "Erro de autenticação", Toast.LENGTH_LONG)
+        }
+    }
+
+    private fun observaProgressBar() {
         mLoginViewModel.onLoading.observe(viewLifecycleOwner) { onLoading ->
-            if(onLoading) {
+            if (onLoading) {
                 binding.progressBar.visibility = View.VISIBLE
             } else {
                 binding.progressBar.visibility = View.GONE
             }
         }
+    }
 
-        mLoginViewModel.onError.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), "Erro de autenticação", Toast.LENGTH_LONG)
+    private fun observaToken() {
+        mLoginViewModel.token.observe(viewLifecycleOwner) {
+            if (it != null) {
+                Log.i("picpay_kt", "onViewCreated: token modificado! ${it.token}")
+                vaiParaHome()
+            }
         }
-
-        observaLogin()
     }
 
     private fun observaLogin() {
