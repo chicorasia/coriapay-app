@@ -1,15 +1,19 @@
 package br.com.chicorialabs.picpayclonekt.ui.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import br.com.chicorialabs.picpayclonekt.data.Login
 import br.com.chicorialabs.picpayclonekt.data.Usuario
 import br.com.chicorialabs.picpayclonekt.data.UsuarioLogado
 import br.com.chicorialabs.picpayclonekt.databinding.FragmentLoginBinding
+import br.com.chicorialabs.picpayclonekt.extension.getString
 import br.com.chicorialabs.picpayclonekt.ui.componente.ComponenteViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
@@ -36,11 +40,34 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         componenteViewModel.atualizaComponentes(bottomNavigation = false)
 
+        mLoginViewModel.token.observe(viewLifecycleOwner) {
+            Log.i("picpay_kt", "onViewCreated: token modificado! ${it.token}")
+            vaiParaHome()
+        }
+
+        mLoginViewModel.onLoading.observe(viewLifecycleOwner) { onLoading ->
+            if(onLoading) {
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.progressBar.visibility = View.GONE
+            }
+        }
+
+        mLoginViewModel.onError.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), "Erro de autenticação", Toast.LENGTH_LONG)
+        }
+
+        observaLogin()
+    }
+
+    private fun observaLogin() {
         mLoginViewModel.efetuouLogin.observe(viewLifecycleOwner, Observer<Boolean> { efetuouLogin ->
-            if(efetuouLogin) {
-                val login = binding.editTextUsuario.text.toString()
-                UsuarioLogado.usuario = Usuario(login)
-                vaiParaHome()
+            if (efetuouLogin) {
+                val usuario = binding.textInputUsuario.getString()
+                val senha = binding.textInputSenha.getString()
+                val login = Login(usuario = usuario, senha = senha)
+                mLoginViewModel.login(login)
+                UsuarioLogado.usuario = Usuario(usuario)
             }
         })
     }
