@@ -9,6 +9,7 @@ import br.com.chicorialabs.picpayclonekt.data.Login
 import br.com.chicorialabs.picpayclonekt.data.Token
 import br.com.chicorialabs.picpayclonekt.data.Usuario
 import br.com.chicorialabs.picpayclonekt.data.UsuarioLogado
+import br.com.chicorialabs.picpayclonekt.data.transacao.State
 import br.com.chicorialabs.picpayclonekt.service.ApiService
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -19,9 +20,7 @@ class LoginViewModel(val apiService: ApiService) : ViewModel() {
     val efetuouLogin: LiveData<Boolean>
         get() = _efetuouLogin
 
-    private val _usuario = MutableLiveData<Usuario>()
-    val usuario: LiveData<Usuario>
-        get() = _usuario
+    val usuarioState = MutableLiveData<State<Usuario>>()
 
     private val _token = MutableLiveData<Token?>()
     val token: LiveData<Token?>
@@ -31,9 +30,9 @@ class LoginViewModel(val apiService: ApiService) : ViewModel() {
     val onLoading: LiveData<Boolean>
         get() = _onLoading
 
-    private val _onError = MutableLiveData<Exception>()
-    val onError: LiveData<Exception>
-        get() = _onError
+//    private val _onError = MutableLiveData<Exception>()
+//    val onError: LiveData<Exception>
+//        get() = _onError
 
 
     //receber e processar um token
@@ -48,6 +47,7 @@ class LoginViewModel(val apiService: ApiService) : ViewModel() {
         UsuarioLogado.isUsuarioNaoLogado()
         _efetuouLogin.value = false
         _token.value = null
+        usuarioState.value = State.NotLogged()
     }
 
     fun launchAndCatchException(block: suspend () -> Unit) {
@@ -58,7 +58,7 @@ class LoginViewModel(val apiService: ApiService) : ViewModel() {
                 block()
             } catch (ex: Exception) {
                 Log.e("picpay_kt", "launchAndCatchException: ${ex.message}")
-                _onError.value = ex
+                usuarioState.value = State.Error(ex)
             } finally {
                 _onLoading.value = false
             }
@@ -68,13 +68,11 @@ class LoginViewModel(val apiService: ApiService) : ViewModel() {
     fun login(login: Login) {
         launchAndCatchException {
             val token = apiService.autentica(login)
-            _token.value = token
-            UsuarioLogado.usuario = Usuario(login.usuario)
             UsuarioLogado.token = token
-            _usuario.value = apiService.getUsuario(UsuarioLogado.usuario.login)
-                _usuario.value?.let {
-                    UsuarioLogado.usuario = it
-                }
+            _token.value = token
+            val usuario = apiService.getUsuario(login.usuario)
+            UsuarioLogado.usuario = usuario
+            usuarioState.value = State.Success(usuario)
         }
     }
 

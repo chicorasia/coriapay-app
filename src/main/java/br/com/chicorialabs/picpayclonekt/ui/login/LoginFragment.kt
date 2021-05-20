@@ -1,7 +1,6 @@
 package br.com.chicorialabs.picpayclonekt.ui.login
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import br.com.chicorialabs.picpayclonekt.data.Login
 import br.com.chicorialabs.picpayclonekt.data.Usuario
 import br.com.chicorialabs.picpayclonekt.data.UsuarioLogado
+import br.com.chicorialabs.picpayclonekt.data.transacao.State
 import br.com.chicorialabs.picpayclonekt.databinding.FragmentLoginBinding
 import br.com.chicorialabs.picpayclonekt.extension.getString
 import br.com.chicorialabs.picpayclonekt.ui.componente.ComponenteViewModel
@@ -40,17 +40,18 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         componenteViewModel.atualizaComponentes(bottomNavigation = false)
 
-        observaToken()
+        mLoginViewModel.usuarioState.observe(viewLifecycleOwner) { state ->
+            when(state) {
+                is State.Success -> { vaiParaHome() }
+                is State.Error -> { Toast.makeText(requireContext(),
+                    "Erro de autenticação", Toast.LENGTH_LONG) }
+                is State.NotLogged -> { }
+            }
+        }
         observaProgressBar()
-        observaErro()
         observaLogin()
     }
 
-    private fun observaErro() {
-        mLoginViewModel.onError.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), "Erro de autenticação", Toast.LENGTH_LONG)
-        }
-    }
 
     private fun observaProgressBar() {
         mLoginViewModel.onLoading.observe(viewLifecycleOwner) { onLoading ->
@@ -58,15 +59,6 @@ class LoginFragment : Fragment() {
                 binding.progressBar.visibility = View.VISIBLE
             } else {
                 binding.progressBar.visibility = View.GONE
-            }
-        }
-    }
-
-    private fun observaToken() {
-        mLoginViewModel.token.observe(viewLifecycleOwner) {
-            if (it != null) {
-                Log.i("picpay_kt", "onViewCreated: token modificado! ${it.token}")
-                vaiParaHome()
             }
         }
     }
