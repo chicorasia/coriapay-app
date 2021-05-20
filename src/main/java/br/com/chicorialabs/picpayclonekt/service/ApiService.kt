@@ -9,7 +9,7 @@ import retrofit2.http.*
 
 interface ApiService {
 
-    @GET("/usuarios/contatos/")
+    @GET("/usuarios/contatos")
     suspend fun getContatos(@Query("login") login: String) : List<Usuario>
 
     @POST("/transacoes")
@@ -22,9 +22,9 @@ interface ApiService {
     suspend fun getSaldo(@Path("login") login: String) : Usuario
 
     @GET("/transacoes")
-    suspend fun getTransacoes(@Query("login") login: String) : PageTransacao
+    suspend fun getTransacoes(@Query("login") login: String): PageTransacao
 
-////   Deprecated?
-//    @GET("/usuarios/{login}")
-//    suspend fun getUsuario(@Path("login") login: String) : Usuario
+//   Deprecated?
+    @GET("/usuarios/{login}")
+    suspend fun getUsuario(@Path("login") login: String) : Usuario
 }

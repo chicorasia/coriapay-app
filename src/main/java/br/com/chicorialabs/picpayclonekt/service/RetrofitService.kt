@@ -1,6 +1,9 @@
 package br.com.chicorialabs.picpayclonekt.service
 
+import br.com.chicorialabs.picpayclonekt.data.UsuarioLogado
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -23,10 +26,27 @@ object RetrofitService {
         return OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
             .addNetworkInterceptor(httpLoggingInterceptor)
+            .addInterceptor {  chain ->
+                val request = aplicarToken(chain)
+                chain.proceed(request)
+            }
             .connectTimeout(1, TimeUnit.SECONDS)
             .readTimeout(40, TimeUnit.SECONDS)
             .writeTimeout(40, TimeUnit.SECONDS)
             .build()
+    }
+
+    private fun aplicarToken(chain: Interceptor.Chain): Request {
+        return if (UsuarioLogado.isUsuarioLogado()) {
+            val token = UsuarioLogado.token
+            chain.request()
+                .newBuilder()
+                .addHeader("Authorization", "${token.tipo} ${token.token}")
+                .build()
+        } else {
+            chain.request()
+        }
+
     }
 
     inline fun <reified T> criarService() = instance.create(T::class.java)

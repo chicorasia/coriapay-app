@@ -32,8 +32,9 @@ class LoginViewModel(val apiService: ApiService) : ViewModel() {
         get() = _onLoading
 
     private val _onError = MutableLiveData<Exception>()
-    val onError: LiveData<Boolean>
-        get() = _onLoading
+    val onError: LiveData<Exception>
+        get() = _onError
+
 
     //receber e processar um token
 
@@ -68,11 +69,12 @@ class LoginViewModel(val apiService: ApiService) : ViewModel() {
         launchAndCatchException {
             val token = apiService.autentica(login)
             _token.value = token
+            UsuarioLogado.usuario = Usuario(login.usuario)
             UsuarioLogado.token = token
-//                _usuario.value = apiService.getUsuario(login.usuario)
-//                _usuario.value?.let {
-//                    UsuarioLogado.usuario = it
-//                }
+            _usuario.value = apiService.getUsuario(UsuarioLogado.usuario.login)
+                _usuario.value?.let {
+                    UsuarioLogado.usuario = it
+                }
         }
     }
 

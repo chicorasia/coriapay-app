@@ -29,18 +29,24 @@ class HomeViewModel(private val apiService: ApiService) : ViewModel() {
 
 
     init {
-        launch {
-            val login = UsuarioLogado.usuario.login
-            val saldo = apiService.getSaldo(login).saldo
-            saldo?.let {
-                _saldo.value = it
-            }
-            val transacoes = apiService.getTransacoes(login).content
-            transacoes?.let {
-                _transacoes.value = it
+        if (UsuarioLogado.isUsuarioLogado()){
+            launch {
+                val login = UsuarioLogado.usuario.login
+                val saldo = apiService.getSaldo(login).saldo
+                saldo.let {
+                    _saldo.value = it
+                }
+                val novoLogin = UsuarioLogado.usuario.login
+                val transacoesRecebidas = apiService.getTransacoes(novoLogin).content
+                transacoesRecebidas.let {
+                    _transacoes.value = it
+                }
             }
         }
+
     }
+
+
 
     private fun launch(block: suspend () -> Unit) {
         viewModelScope.launch {
