@@ -19,9 +19,9 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class LoginFragment : Fragment() {
 
-//    companion object {
-//        fun newInstance() = LoginFragment()
-//    }
+    companion object {
+        fun newInstance() = LoginFragment()
+    }
 
     private val mLoginViewModel: LoginViewModel by sharedViewModel()
     private val componenteViewModel: ComponenteViewModel by sharedViewModel()
@@ -48,20 +48,9 @@ class LoginFragment : Fragment() {
                 is State.NotLogged -> { }
             }
         }
-        observaProgressBar()
         observaLogin()
     }
 
-
-    private fun observaProgressBar() {
-        mLoginViewModel.onLoading.observe(viewLifecycleOwner) { onLoading ->
-            if (onLoading) {
-                binding.progressBar.visibility = View.VISIBLE
-            } else {
-                binding.progressBar.visibility = View.GONE
-            }
-        }
-    }
 
     private fun observaLogin() {
         mLoginViewModel.efetuouLogin.observe(viewLifecycleOwner, Observer<Boolean> { efetuouLogin ->

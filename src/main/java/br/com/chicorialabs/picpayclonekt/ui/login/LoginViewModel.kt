@@ -1,6 +1,7 @@
 package br.com.chicorialabs.picpayclonekt.ui.login
 
 import android.util.Log
+import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,6 +15,7 @@ import br.com.chicorialabs.picpayclonekt.service.ApiService
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+
 class LoginViewModel(val apiService: ApiService) : ViewModel() {
 
     private val _efetuouLogin: MutableLiveData<Boolean> = MutableLiveData(false)
@@ -23,19 +25,9 @@ class LoginViewModel(val apiService: ApiService) : ViewModel() {
     val usuarioState = MutableLiveData<State<Usuario>>()
 
     private val _token = MutableLiveData<Token?>()
-    val token: LiveData<Token?>
-        get() = _token
 
-    private val _onLoading = MutableLiveData<Boolean>()
-    val onLoading: LiveData<Boolean>
-        get() = _onLoading
+    val onLoading = ObservableBoolean(false)
 
-//    private val _onError = MutableLiveData<Exception>()
-//    val onError: LiveData<Exception>
-//        get() = _onError
-
-
-    //receber e processar um token
 
     fun onLoginEfetuado() {
         launchAndCatchException {
@@ -52,15 +44,15 @@ class LoginViewModel(val apiService: ApiService) : ViewModel() {
 
     fun launchAndCatchException(block: suspend () -> Unit) {
         viewModelScope.launch {
-            _onLoading.value = true
+            onLoading.set(true)
             try {
-                delay(500)
+                delay(500) //estético
                 block()
             } catch (ex: Exception) {
                 Log.e("picpay_kt", "launchAndCatchException: ${ex.message}")
                 usuarioState.value = State.Error(ex)
             } finally {
-                _onLoading.value = false
+                onLoading.set(false)
             }
         }
     }
@@ -75,6 +67,8 @@ class LoginViewModel(val apiService: ApiService) : ViewModel() {
             usuarioState.value = State.Success(usuario)
         }
     }
+
+
 
 
 }

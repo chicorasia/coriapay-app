@@ -53,7 +53,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ajustes_icon"
-            app:layout_constraintVertical_bias="0.35" />
+            app:layout_constraintVertical_bias="0.35"
+            />
 
         <LinearLayout
             android:id="@+id/ajustes_linear"
