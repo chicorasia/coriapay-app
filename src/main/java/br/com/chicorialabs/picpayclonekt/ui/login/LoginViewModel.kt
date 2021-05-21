@@ -23,9 +23,7 @@ class LoginViewModel(val apiService: ApiService) : ViewModel() {
         get() = _efetuouLogin
 
     val usuarioState = MutableLiveData<State<Usuario>>()
-
     private val _token = MutableLiveData<Token?>()
-
     val onLoading = ObservableBoolean(false)
 
 

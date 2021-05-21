@@ -8,22 +8,16 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.com.chicorialabs.picpayclonekt.R
-import br.com.chicorialabs.picpayclonekt.data.CartaoCredito
-import br.com.chicorialabs.picpayclonekt.data.UsuarioLogado
-import br.com.chicorialabs.picpayclonekt.data.transacao.Transacao
-import br.com.chicorialabs.picpayclonekt.data.transacao.Transacao.Companion.gerarHash
 import br.com.chicorialabs.picpayclonekt.databinding.FragmentTransacaoBinding
-import br.com.chicorialabs.picpayclonekt.extension.formatar
 import br.com.chicorialabs.picpayclonekt.ui.componente.ComponenteViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.util.*
 
 class TransacaoFragment : Fragment() {
 
     private lateinit var binding: FragmentTransacaoBinding
     private val argumentos by navArgs<TransacaoFragmentArgs>()
-    private val transacaoViewModel: TransacaoViewModel by viewModel()
+    private val mTransacaoViewModel: TransacaoViewModel by viewModel()
     private val componenteViewModel: ComponenteViewModel by sharedViewModel()
     private val usuario by lazy {
         argumentos.usuario
@@ -37,6 +31,8 @@ class TransacaoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentTransacaoBinding.inflate(layoutInflater, container, false)
+        binding.transacaoViewModel = mTransacaoViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root
     }
@@ -54,7 +50,7 @@ class TransacaoFragment : Fragment() {
     }
 
     private fun observarTransacao() {
-        transacaoViewModel.transacao.observe(viewLifecycleOwner) {
+        mTransacaoViewModel.transacao.observe(viewLifecycleOwner) {
             //retorna para a tela anterior quando a transacao é gravada e retornada
             val direcao = TransacaoFragmentDirections.actionTransacaoFragmentToNavigationPagar()
             controlador.navigate(direcao)
@@ -68,50 +64,17 @@ class TransacaoFragment : Fragment() {
             val valor = getValor()
 
             val transacao = if (isCartaoCredito) {
-                criarTransferenciaCartao(isCartaoCredito, valor)
+                mTransacaoViewModel.criarTransferenciaCartao(isCartaoCredito,
+                    valor = valor, destino = usuario)
             } else {
-                criarTransferenciaSaldo(valor)
+                mTransacaoViewModel.criarTransferenciaSaldo(valor = valor, destino = usuario)
             }
 
-            transacaoViewModel.transferir(transacao)
+            mTransacaoViewModel.transferir(transacao)
         }
     }
 
-    private fun criarTransferenciaSaldo(valor: Double) = Transacao(
-            codigo = gerarHash(),
-            origem = UsuarioLogado.usuario,
-            destino = usuario,
-            dataHora = Calendar.getInstance().formatar(),
-            isCartaoCredito = false,
-            valor = valor,
-        )
 
-    private fun criarTransferenciaCartao(isCartaoCredito: Boolean, valor: Double) =
-        Transacao(
-            codigo = gerarHash(),
-            origem = UsuarioLogado.usuario,
-            destino = usuario,
-            dataHora = Calendar.getInstance().formatar(),
-            isCartaoCredito = isCartaoCredito,
-            valor = valor,
-            cartaoCredito = criarCartaoCredito()
-        )
-
-    private fun criarCartaoCredito(): CartaoCredito {
-        val numeroCartao = binding.transacaoNumeroCartao.text.toString()
-        val nomeTitular = binding.transacaoTitularCartao.text.toString()
-        val vencimento = binding.transacaoValidadeCartao.text.toString()
-        val cvc = binding.transcaoCvcCartao.text.toString()
-
-        return CartaoCredito(
-            numeroCartao = numeroCartao,
-            nomeTitular = nomeTitular,
-            dataExpiracao = vencimento,
-            codigoSeguranca = cvc,
-            usuario = UsuarioLogado.usuario,
-        )
-
-    }
 
     private fun getValor(): Double {
         val valor = binding.transacaoValorEdt.text.toString()

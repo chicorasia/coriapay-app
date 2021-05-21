@@ -8,7 +8,6 @@
         <variable
             name="loginViewModel"
             type="br.com.chicorialabs.picpayclonekt.ui.login.LoginViewModel" />
-<!--        <import type="br.com.chicorialabs.picpayclonekt.data.Usuario"/>-->
         <variable
             name="ajustesViewModel"
             type="br.com.chicorialabs.picpayclonekt.ui.ajustes.AjustesViewModel" />

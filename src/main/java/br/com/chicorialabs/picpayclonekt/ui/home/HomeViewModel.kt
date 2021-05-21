@@ -18,14 +18,13 @@ class HomeViewModel(private val apiService: ApiService) : ViewModel() {
     private val _erro = MutableLiveData<String>().also {
         it.value = null
     }
+    val erro: LiveData<String>
+        get() = _erro
+
 
     private val _transacoes = MutableLiveData<List<Transacao>>()
     val transacoes: LiveData<List<Transacao>>
         get() = _transacoes
-
-    val erro: LiveData<String>
-        get() = _erro
-
 
 
     init {
@@ -45,7 +44,6 @@ class HomeViewModel(private val apiService: ApiService) : ViewModel() {
         }
 
     }
-
 
 
     private fun launch(block: suspend () -> Unit) {
