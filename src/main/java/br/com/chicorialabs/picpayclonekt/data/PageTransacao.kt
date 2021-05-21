@@ -1,9 +1,9 @@
 package br.com.chicorialabs.picpayclonekt.data
 
-import br.com.chicorialabs.picpayclonekt.data.transacao.Transacao
+import br.com.chicorialabs.picpayclonekt.data.transacao.TransacaoNetwork
 
 data class PageTransacao(
-    val content: List<Transacao>,
+    val content: List<TransacaoNetwork>,
     val empty: Boolean,
     val first: Boolean,
     val last: Boolean,

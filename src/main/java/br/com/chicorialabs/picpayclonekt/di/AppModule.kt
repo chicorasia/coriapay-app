@@ -1,5 +1,7 @@
 package br.com.chicorialabs.picpayclonekt.di
 
+import br.com.chicorialabs.picpayclonekt.repository.TransacaoRepository
+import br.com.chicorialabs.picpayclonekt.repository.TransacaoRepositoryImpl
 import br.com.chicorialabs.picpayclonekt.service.ApiService
 import br.com.chicorialabs.picpayclonekt.service.RetrofitService
 import br.com.chicorialabs.picpayclonekt.ui.ajustes.AjustesViewModel
@@ -22,4 +24,8 @@ val viewModelModule = module {
 
 val serviceModule = module {
     single { RetrofitService.criarService<ApiService>() }
+}
+
+val repositoryModule = module {
+    single<TransacaoRepository> { TransacaoRepositoryImpl(get()) }
 }

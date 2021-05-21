@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.chicorialabs.picpayclonekt.data.UsuarioLogado
 import br.com.chicorialabs.picpayclonekt.data.transacao.Transacao
-import br.com.chicorialabs.picpayclonekt.service.ApiService
+import br.com.chicorialabs.picpayclonekt.repository.TransacaoRepository
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val apiService: ApiService) : ViewModel() {
+class HomeViewModel(private val repository: TransacaoRepository) : ViewModel() {
 
     private val _saldo = MutableLiveData<Double>()
     val saldo: LiveData<Double>
@@ -31,12 +31,12 @@ class HomeViewModel(private val apiService: ApiService) : ViewModel() {
         if (UsuarioLogado.isUsuarioLogado()){
             launch {
                 val login = UsuarioLogado.usuario.login
-                val saldo = apiService.getSaldo(login).saldo
+                val saldo = repository.getSaldo(login)
                 saldo.let {
                     _saldo.value = it
                 }
                 val novoLogin = UsuarioLogado.usuario.login
-                val transacoesRecebidas = apiService.getTransacoes(novoLogin).content
+                val transacoesRecebidas = repository.getTransacoes(login)
                 transacoesRecebidas.let {
                     _transacoes.value = it
                 }
