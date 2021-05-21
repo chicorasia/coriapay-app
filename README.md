@@ -1,11 +1,16 @@
-# picpayclonekt-app by chicorasia
+# PicPay Clone App (Kotlin)  by chicorasia :euro::money_with_wings::heavy_dollar_sign:
 
-PicPay Clone App.
+App desenvolvido no desafio PicPay Clone da Digital Innovation One Pro :orange_heart:
 
-- Emprego de ViewBinding e 'kotlin-parcelize'em lugar de 'kotlin-extensions'
+A solução tem como características: 
+
+- Uso progressivo de DataBinding para comunicação direta entre ViewModel e componentes da UI
+- Autenticação JWT
+- Não emprega o plugin depreciado 'kotlin-extensions'; em seu lugar, o app faz uso de ViewBinding e 'kotlin-parcelize'
 - Controle de visibilidade de componentes por meio de ViewModel específico (ComponenteViewModel)
 - Injeção de dependências com Koin
-- DataBinding para comunicação direta entre ViewModel e componentes da UI
+- Emprego de melhores práticas de organização do código e Clean Architeture
+
 
 ***
 :earth_africa: O App consome esta API: https://github.com/chicorasia/picpayclone-kt-v2
