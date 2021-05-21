@@ -10,6 +10,7 @@ A solução tem como características:
 - Controle de visibilidade de componentes por meio de ViewModel específico (ComponenteViewModel)
 - Injeção de dependências com Koin
 - Emprego de melhores práticas de organização do código e Clean Architeture
+- Sintaxe moderna e idiomática
 
 
 ***

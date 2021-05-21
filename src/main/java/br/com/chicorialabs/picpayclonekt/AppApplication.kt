@@ -1,6 +1,7 @@
 package br.com.chicorialabs.picpayclonekt
 
 import android.app.Application
+import br.com.chicorialabs.picpayclonekt.di.daoModule
 import br.com.chicorialabs.picpayclonekt.di.repositoryModule
 import br.com.chicorialabs.picpayclonekt.di.serviceModule
 import br.com.chicorialabs.picpayclonekt.di.viewModelModule
@@ -13,7 +14,12 @@ class AppApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@AppApplication)
-            modules(viewModelModule, serviceModule, repositoryModule)
+            modules(
+                viewModelModule,
+                serviceModule,
+                repositoryModule,
+                daoModule
+            )
         }
     }
 

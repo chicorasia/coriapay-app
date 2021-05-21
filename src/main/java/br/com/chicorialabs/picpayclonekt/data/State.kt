@@ -1,4 +1,4 @@
-package br.com.chicorialabs.picpayclonekt.data.transacao
+package br.com.chicorialabs.picpayclonekt.data
 
 sealed class State<T> {
     class Success<T>(val data: T) : State<T>()

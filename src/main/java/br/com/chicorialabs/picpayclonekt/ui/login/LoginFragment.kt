@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import br.com.chicorialabs.picpayclonekt.data.Login
+import br.com.chicorialabs.picpayclonekt.data.State
 import br.com.chicorialabs.picpayclonekt.data.Usuario
 import br.com.chicorialabs.picpayclonekt.data.UsuarioLogado
-import br.com.chicorialabs.picpayclonekt.data.transacao.State
 import br.com.chicorialabs.picpayclonekt.databinding.FragmentLoginBinding
 import br.com.chicorialabs.picpayclonekt.extension.getString
 import br.com.chicorialabs.picpayclonekt.ui.componente.ComponenteViewModel
@@ -30,7 +30,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentLoginBinding.inflate(layoutInflater, container, false)
         binding.loginViewModel = mLoginViewModel
         return binding.root
@@ -44,7 +44,7 @@ class LoginFragment : Fragment() {
             when(state) {
                 is State.Success -> { vaiParaHome() }
                 is State.Error -> { Toast.makeText(requireContext(),
-                    "Erro de autenticação", Toast.LENGTH_LONG) }
+                    "Erro de autenticação", Toast.LENGTH_LONG).show() }
                 is State.NotLogged -> { }
             }
         }

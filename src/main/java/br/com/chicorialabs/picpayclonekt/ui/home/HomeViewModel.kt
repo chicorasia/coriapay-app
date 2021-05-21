@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import br.com.chicorialabs.picpayclonekt.data.UsuarioLogado
 import br.com.chicorialabs.picpayclonekt.data.transacao.Transacao
 import br.com.chicorialabs.picpayclonekt.repository.TransacaoRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: TransacaoRepository) : ViewModel() {
@@ -33,25 +34,23 @@ class HomeViewModel(private val repository: TransacaoRepository) : ViewModel() {
                 val login = UsuarioLogado.usuario.login
                 val saldo = repository.getSaldo(login)
                 saldo.let {
-                    _saldo.value = it
+                    _saldo.postValue(it)
                 }
-                val novoLogin = UsuarioLogado.usuario.login
                 val transacoesRecebidas = repository.getTransacoes(login)
                 transacoesRecebidas.let {
-                    _transacoes.value = it
+                    _transacoes.postValue(it)
                 }
             }
         }
 
     }
 
-
     private fun launch(block: suspend () -> Unit) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 block()
             } catch (ex: Exception) {
-                _erro.value = ex.message
+                _erro.postValue(ex.message)
             }
         }
     }
