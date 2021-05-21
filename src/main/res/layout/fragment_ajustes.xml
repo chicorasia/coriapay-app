@@ -8,6 +8,10 @@
         <variable
             name="loginViewModel"
             type="br.com.chicorialabs.picpayclonekt.ui.login.LoginViewModel" />
+<!--        <import type="br.com.chicorialabs.picpayclonekt.data.Usuario"/>-->
+        <variable
+            name="ajustesViewModel"
+            type="br.com.chicorialabs.picpayclonekt.ui.ajustes.AjustesViewModel" />
     </data>
 
 
@@ -46,7 +50,8 @@
             android:id="@+id/ajustes_login_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login_placeholder"
+            android:text="@{ajustesViewModel.usuario.login}"
+            tools:text="@string/login_placeholder"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
@@ -78,7 +83,8 @@
                 android:id="@+id/ajustes_meupicpay_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/login_placeholder"
+                android:text="@{ajustesViewModel.usuario.login}"
+                tools:text="@string/login_placeholder"
                 android:textSize="16sp" />
 
             <TextView
@@ -93,7 +99,8 @@
                 android:id="@+id/ajustes_meunumero_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                tools:text="(41)-11111-2222"
+                android:text="@{ajustesViewModel.usuario.numeroTelefone}"
                 android:textSize="16sp" />
 
             <TextView
@@ -108,7 +115,8 @@
                 android:id="@+id/ajustes_meuemail_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                tools:text="@string/email_placeholder"
+                android:text="@{ajustesViewModel.usuario.email}"
                 android:textSize="16sp" />
 
             <com.google.android.material.button.MaterialButton

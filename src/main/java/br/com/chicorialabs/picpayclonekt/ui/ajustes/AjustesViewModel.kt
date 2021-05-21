@@ -10,5 +10,4 @@ class AjustesViewModel : ViewModel() {
     val usuario: Usuario
         get() = _usuario
 
-
 }

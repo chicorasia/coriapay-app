@@ -23,23 +23,6 @@ class AjustesFragment : Fragment() {
         findNavController()
     }
 
-    private val ajustesLogin by lazy {
-        binding.ajustesLoginTv
-    }
-
-    private val meuPicPayLogin by lazy {
-        binding.ajustesMeupicpayTv
-    }
-
-    private val meuNumero by lazy {
-        binding.ajustesMeunumeroTv
-    }
-
-    private val meuEmail by lazy {
-        binding.ajustesMeuemailTv
-    }
-
-
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -47,13 +30,14 @@ class AjustesFragment : Fragment() {
     ): View? {
         binding = FragmentAjustesBinding.inflate(layoutInflater, container, false)
         binding.loginViewModel = mLoginViewModel
+        binding.ajustesViewModel = mAjustesViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        inicializaCamposTexto()
 
         mComponenteViewModel.atualizaComponentes(bottomNavigation = true)
 
@@ -67,12 +51,4 @@ class AjustesFragment : Fragment() {
 
     }
 
-    private fun inicializaCamposTexto() {
-        mAjustesViewModel.usuario.let {
-            ajustesLogin.text = it.login
-            meuPicPayLogin.text = it.login
-            meuNumero.text = it.numeroTelefone ?: "Nenhum número cadastrado"
-            meuEmail.text = it.email ?: "Nenhum email cadastrado"
-        }
-    }
 }

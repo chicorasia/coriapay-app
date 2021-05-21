@@ -40,4 +40,5 @@
     <string name="meu_email">Meu email</string>
     <string name="meu_numero">Meu número</string>
     <string name="meu_picpay">Meu PicPay</string>
+    <string name="email_placeholder">email@servidor.com</string>
 </resources>
