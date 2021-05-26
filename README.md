@@ -1,6 +1,6 @@
-# PicPay Clone App (Kotlin)  by chicorasia :euro::money_with_wings::heavy_dollar_sign:
+# CóriaPay by chicorasia :euro::money_with_wings::heavy_dollar_sign:
 
-App desenvolvido no desafio PicPay Clone da Digital Innovation One Pro :orange_heart:
+App desenvolvido no desafio da Digital Innovation One Pro :orange_heart:. Simula funcionalidades de um aplicativo popular de transferências e pagamentos peer-to-peer.
 
 A solução tem como características: 
 
@@ -14,7 +14,7 @@ A solução tem como características:
 
 
 ***
-:earth_africa: O App consome esta API: https://github.com/chicorasia/picpayclone-kt-v2
+:earth_africa: O App consome esta API: https://github.com/cicerojmm/picPayCloneMentoriaDIO
 ***
 
 
