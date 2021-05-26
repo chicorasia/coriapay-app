@@ -18,7 +18,6 @@ A solução tem como características:
 ***
 
 
-![tela de login](Screenshot_1.png)
 ![tela home](Screenshot_2.png)
 ![tela de transferencia](Screenshot_3.png)
 ![tela de ajustes](Screenshot_4.png)
