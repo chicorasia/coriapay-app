@@ -15,7 +15,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/verdeMedio">
+        android:background="@color/magentaMedio">
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -82,8 +82,8 @@
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:contentDescription="@string/picpay_logo_description"
-            android:scaleType="fitXY"
-            android:src="@drawable/picpay_logo"
+            android:scaleType="fitCenter"
+            android:src="@drawable/coriapay_logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -2,9 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="verdeMedio">#21C25E</color>
-    <color name="verdeEscuro">#009031</color>
-    <color name="verdeClaro">#66f68d</color>
+    <color name="magentaMedio">#811a5a</color>
+    <color name="magentaEscuro">#500031</color>
+    <color name="magentaClaro">#b34c87</color>
     <color name="cinzaClaro">#F1F1F1</color>
     <color name="cinza">#DBDBDB</color>
 
