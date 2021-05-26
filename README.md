@@ -17,7 +17,7 @@ A solução tem como características:
 :earth_africa: O App consome esta API: https://github.com/cicerojmm/picPayCloneMentoriaDIO
 ***
 
-
+![tela_login](Screenshot_1.png)
 ![tela home](Screenshot_2.png)
 ![tela de transferencia](Screenshot_3.png)
 ![tela de ajustes](Screenshot_4.png)
