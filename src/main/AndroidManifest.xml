@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.com.chicorialabs.picpayclonekt">
+    package="br.com.chicorialabs.coriapaykt">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name=".AppApplication"
+        android:name="br.com.chicorialabs.coriapaykt.AppApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CoriaPay">
         <activity
-            android:name=".MainActivity"
+            android:name="br.com.chicorialabs.coriapaykt.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

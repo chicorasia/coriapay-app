@@ -7,10 +7,10 @@
     <data>
         <variable
             name="loginViewModel"
-            type="br.com.chicorialabs.picpayclonekt.ui.login.LoginViewModel" />
+            type="br.com.chicorialabs.coriapaykt.ui.login.LoginViewModel" />
         <variable
             name="ajustesViewModel"
-            type="br.com.chicorialabs.picpayclonekt.ui.ajustes.AjustesViewModel" />
+            type="br.com.chicorialabs.coriapaykt.ui.ajustes.AjustesViewModel" />
     </data>
 
 

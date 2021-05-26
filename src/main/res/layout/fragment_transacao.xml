@@ -7,7 +7,7 @@
     <data>
         <variable
             name="transacaoViewModel"
-            type="br.com.chicorialabs.picpayclonekt.ui.transacao.TransacaoViewModel" />
+            type="br.com.chicorialabs.coriapaykt.ui.transacao.TransacaoViewModel" />
     </data>
     
 <androidx.constraintlayout.widget.ConstraintLayout 

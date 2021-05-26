@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="br.com.chicorialabs.picpayclonekt.ui.home.HomeFragment"
+        android:name="br.com.chicorialabs.coriapaykt.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_pagar"
-        android:name="br.com.chicorialabs.picpayclonekt.ui.pagar.PagarFragment"
+        android:name="br.com.chicorialabs.coriapaykt.ui.pagar.PagarFragment"
         android:label="@string/title_pagar"
         tools:layout="@layout/fragment_pagar" >
         <action
@@ -25,12 +25,12 @@
 
     <fragment
         android:id="@+id/navigation_ajustes"
-        android:name="br.com.chicorialabs.picpayclonekt.ui.ajustes.AjustesFragment"
+        android:name="br.com.chicorialabs.coriapaykt.ui.ajustes.AjustesFragment"
         android:label="@string/title_ajustes"
         tools:layout="@layout/fragment_ajustes" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="br.com.chicorialabs.picpayclonekt.ui.login.LoginFragment"
+        android:name="br.com.chicorialabs.coriapaykt.ui.login.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
@@ -46,7 +46,7 @@
         app:popUpToInclusive="true" />
     <fragment
         android:id="@+id/transacaoFragment"
-        android:name="br.com.chicorialabs.picpayclonekt.ui.transacao.TransacaoFragment"
+        android:name="br.com.chicorialabs.coriapaykt.ui.transacao.TransacaoFragment"
         android:label="fragment_transacao"
         tools:layout="@layout/fragment_transacao" >
         <action
@@ -55,7 +55,7 @@
             app:popUpTo="@id/navigation_pagar"
             app:popUpToInclusive="true" />
         <argument android:name="usuario"
-            app:argType="br.com.chicorialabs.picpayclonekt.data.Usuario" />
+            app:argType="br.com.chicorialabs.coriapaykt.data.Usuario" />
     </fragment>
 
 </navigation>

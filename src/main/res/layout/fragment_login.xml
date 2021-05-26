@@ -7,7 +7,7 @@
         <import type="android.view.View"/>
         <variable
             name="loginViewModel"
-            type="br.com.chicorialabs.picpayclonekt.ui.login.LoginViewModel"/>
+            type="br.com.chicorialabs.coriapaykt.ui.login.LoginViewModel"/>
 
     </data>
 
